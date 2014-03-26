@@ -14,12 +14,13 @@ require 'capistrano/deploy'
 #   https://github.com/capistrano/bundler
 #   https://github.com/capistrano/rails
 #
-# require 'capistrano/rvm'
-# require 'capistrano/rbenv'
-# require 'capistrano/chruby'
-# require 'capistrano/bundler'
-# require 'capistrano/rails/assets'
-# require 'capistrano/rails/migrations'
+require 'capistrano/rvm'
+require 'capistrano/bundler'
+require 'capistrano/rails/assets'
+require 'capistrano/rails/migrations'
+
+#因为使用puma做Server，所以要加上这一条
+require 'capistrano/puma'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }

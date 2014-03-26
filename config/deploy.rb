@@ -1,8 +1,10 @@
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
-set :application, 'my_app_name'
-set :repo_url, 'git@example.com:me/my_repo.git'
+set :application, 'capistrano3-with-puma'                                   #项目名称
+set :repo_url,    'https://github.com/randeeshen/capistrano3-with-puma.git'     #git仓库的存放地址
+set :linked_files, %w{config/database.yml}                                  #需要做链接的文件，一般database.yml和部分配置文件
+set :linked_dirs,  %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
@@ -44,6 +46,7 @@ namespace :deploy do
     end
   end
 
+  after :restart,    :'puma:restart'    #添加此项重启puma
   after :publishing, :restart
 
   after :restart, :clear_cache do
